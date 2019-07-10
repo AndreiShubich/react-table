@@ -1,6 +1,6 @@
 {
-  "name": "react-table",
-  "version": "0.1.0",
+  "name": "@shubich/react-table",
+  "version": "0.1.1",
   "description": "Building dynamic tables with React.js",
   "main": "index.js",
   "scripts": {
