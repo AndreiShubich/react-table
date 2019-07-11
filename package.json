@@ -1,9 +1,10 @@
 {
   "name": "@shubich/react-table",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Building dynamic tables with React.js",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src --ext .ts --ext .tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,17 @@
   "devDependencies": {
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-flowtype": "^3.11.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.5.0",
     "typescript": "^3.5.2"
   },
   "peerDependencies": {

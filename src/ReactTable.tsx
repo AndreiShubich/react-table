@@ -1,71 +1,63 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, HTMLAttributes } from 'react';
 
 interface IObject<T = any> {
   [key: string]: T;
 }
 
-type DataPropType = IObject | IObject[];
-
-const getUniqueDataKeys = (data: IObject[]): string[] => {
-  const uniqueKeys = data.reduce((acc: string[], item) => {
+const getUniqueListKeys = (list: IObject[]): string[] => {
+  const uniqueKeys = list.reduce((acc: string[], item) => {
     const itemKeys = Object.keys(item);
     const newKeys = itemKeys.filter(key => !acc.includes(key));
-    
+
     return [...acc, ...newKeys];
   }, []);
 
   return uniqueKeys;
-}
-
-const formatData = (data: DataPropType) => {
-  if (Array.isArray(data)) {
-    return data;
-  }
-
-  return [data];
-}
+};
 
 const ReactTable: React.FC<{
-  data: DataPropType;
+  data: IObject | IObject[];
   showIndex?: boolean;
   indexName?: string;
-}> = ({ data, showIndex = true, indexName = '(index)' }) => {
-  const dataArr = useMemo(() => formatData(data), [data]);
+} & HTMLAttributes<HTMLTableElement>> = ({
+  data, showIndex = true, indexName = '(index)', ...tableProps
+}) => {
+  const list = useMemo(() => {
+    const arr = Array.isArray(data) ? data : [data];
 
-  const columnNames = useMemo(() => {
-    const names = getUniqueDataKeys(dataArr);
-    
     if (showIndex) {
-      return [indexName, ...names];
-    } 
+      return arr.map((item, index) => ({ ...item, [indexName]: index }));
+    }
 
-    return names;
-  }, [dataArr, indexName, showIndex]);
-  
-  return <table>
-    <thead>
-      {
-        columnNames.map(cName => <th>{cName}</th>)
-      }
-    </thead>
-    <tbody>
-      {
-        dataArr.map((item, index) => <tr>
-          {
-            columnNames.map(cName => {
-              if (showIndex && cName === indexName) {
-                return <td>{index}</td>;
-              } return (
-                <td>
-                  {item[cName]}
-                </td>
-              );
-            })
-          }
-        </tr>)
-      }
-    </tbody>
-  </table>
+    return arr;
+  }, [data, indexName, showIndex]);
+
+  const columnNames = useMemo(() => getUniqueListKeys(list), [list]);
+
+  return (
+    <table {...tableProps}>
+      <thead>
+        {
+          columnNames.map(cName => <th key={cName}>{cName}</th>)
+        }
+      </thead>
+      <tbody>
+        {
+          list.map(item => (
+            <tr>
+              {
+                columnNames.map(cName => (
+                  <td key={cName}>
+                    {item[cName]}
+                  </td>
+                ))
+              }
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  );
 };
 
 export default React.memo(ReactTable);
