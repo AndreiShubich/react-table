@@ -16,6 +16,10 @@ npm install @shubich/react-table
 ### Input
 
 ```js
+import * as React from "react";
+import { render } from "react-dom";
+import ReactTable from "@shubich/react-table";
+
 const cars = [
   {
     mark: "BMW",
@@ -32,11 +36,18 @@ const cars = [
   }
 ];
 
-<ReactTable 
-    data={cars}
-    showIndex={true}
-    indexName='id'
-/>;
+function App() {
+  return (
+    <ReactTable
+      data={cars}
+      showIndex={true}
+      indexName="id"
+    />
+  );
+}
+
+const rootElement = document.getElementById("root");
+render(<App />, rootElement);
 ```
 
 ### Output
