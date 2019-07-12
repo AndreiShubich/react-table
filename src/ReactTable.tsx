@@ -23,9 +23,9 @@ const ReactTable: React.FC<{
       </thead>
       <tbody>
         {
-          list.map(item => (
+          list.map((item, index) => (
             <tr>
-              {showIndex && <td>{indexName}</td>}
+              {showIndex && <td>{index + 1}</td>}
               {
                 columnNames.map(cName => (
                   <td key={cName}>

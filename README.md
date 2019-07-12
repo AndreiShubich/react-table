@@ -32,7 +32,7 @@ const cars = [
   {
     mark: "Tesla",
     model: "Model S",
-    ["0-60 mph"]: "2.4s"
+    "0-60 mph": "2.4s"
   }
 ];
 
