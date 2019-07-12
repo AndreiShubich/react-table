@@ -22,8 +22,8 @@ var ReactTable = function (_a) {
         {columnNames.map(function (cName) { return <th key={cName}>{cName}</th>; })}
       </thead>
       <tbody>
-        {list.map(function (item) { return (<tr>
-              {showIndex && <td>{indexName}</td>}
+        {list.map(function (item, index) { return (<tr>
+              {showIndex && <td>{index + 1}</td>}
               {columnNames.map(function (cName) { return (<td key={cName}>
                     {getItemValue(item[cName])}
                   </td>); })}
